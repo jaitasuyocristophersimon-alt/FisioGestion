@@ -1,0 +1,14 @@
+{
+  "id": "./",
+  "name": "FisioGestión — Control de consulta",
+  "short_name": "FisioGestión",
+  "description": "Registro local de pacientes, sesiones y pagos para fisioterapia.",
+  "lang": "es",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f5f8f7",
+  "theme_color": "#123c39",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}

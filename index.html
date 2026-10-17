@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#123c39">
+  <meta name="description" content="Registro local de pacientes, sesiones y pagos para fisioterapia.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <title>FisioGestión</title>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#inicio" aria-label="FisioGestión inicio"><span class="brand-mark">F</span><span>Fisio<span class="brand-light">Gestión</span><small>Tu consulta, en orden</small></span></a>
+    <button id="installBtn" class="install-btn" hidden>＋ Instalar</button>
+  </header>
+  <main class="shell">
+    <section class="welcome" id="inicio">
+      <div><p class="eyebrow">PANEL DE CONSULTA</p><h1>Hola, fisioterapeuta <span>👋</span></h1><p class="muted">Lleva cada proceso con claridad y cuidado.</p></div>
+      <div class="today" id="today"></div>
+    </section>
+    <section class="stats" aria-label="Resumen">
+      <article class="stat-card"><span class="stat-icon mint">♙</span><div><span class="stat-label">Pacientes</span><strong id="patientCount">0</strong></div></article>
+      <article class="stat-card"><span class="stat-icon peach">◷</span><div><span class="stat-label">Sesiones</span><strong id="sessionCount">0</strong></div></article>
+      <article class="stat-card"><span class="stat-icon lilac">$</span><div><span class="stat-label">Saldo estimado</span><strong id="balanceTotal">Bs 0</strong></div></article>
+    </section>
+    <nav class="tabs" aria-label="Secciones">
+      <button class="tab active" data-view="patients">Pacientes</button><button class="tab" data-view="sessions">Sesiones</button><button class="tab" data-view="payments">Pagos</button>
+    </nav>
+    <section class="view active" id="patientsView">
+      <div class="section-head"><div><p class="eyebrow">DIRECTORIO</p><h2>Tus pacientes</h2></div><button class="primary" id="addPatientBtn">＋ Nuevo paciente</button></div>
+      <label class="search"><span>⌕</span><input id="searchInput" type="search" placeholder="Buscar por nombre, teléfono o patología…" aria-label="Buscar pacientes"></label>
+      <div id="patientList" class="patient-list"></div>
+      <div id="emptyPatients" class="empty" hidden><span>♡</span><h3>Aún no hay pacientes</h3><p>Agrega el primero para comenzar su seguimiento.</p><button class="primary" id="emptyAddBtn">＋ Registrar paciente</button></div>
+    </section>
+    <section class="view" id="sessionsView">
+      <div class="section-head"><div><p class="eyebrow">SEGUIMIENTO CLÍNICO</p><h2>Sesiones recientes</h2></div><button class="primary" id="addSessionBtn">＋ Registrar sesión</button></div>
+      <div id="sessionList" class="record-list"></div><div id="emptySessions" class="empty" hidden><span>◷</span><h3>Sin sesiones todavía</h3><p>Registra una sesión desde aquí o desde el perfil del paciente.</p></div>
+    </section>
+    <section class="view" id="paymentsView">
+      <div class="section-head"><div><p class="eyebrow">CONTROL DE CUENTAS</p><h2>Pagos y saldos</h2></div></div>
+      <div class="notice"><span>ⓘ</span><p>El saldo es una estimación: sesiones registradas × precio actual, menos los pagos anotados.</p></div>
+      <div id="paymentList" class="payment-list"></div><div id="emptyPayments" class="empty" hidden><span>$</span><h3>No hay cuentas por mostrar</h3><p>Registra pacientes para ver aquí sus saldos.</p></div>
+      <h3 class="subheading">Pagos recientes</h3><div id="recentPayments" class="record-list"></div><p id="emptyRecentPayments" class="muted" hidden>Aún no se han anotado pagos.</p>
+    </section>
+    <footer>FisioGestión · Información guardada en este dispositivo</footer>
+  </main>
+  <dialog id="patientDialog"><form id="patientForm" method="dialog"><div class="dialog-head"><div><p class="eyebrow">NUEVO REGISTRO</p><h2>Datos del paciente</h2></div><button type="button" class="close" data-close aria-label="Cerrar">×</button></div><input type="hidden" name="id"><label>Nombre completo<input name="name" required maxlength="100" placeholder="Ej. María Fernanda López"></label><label>Teléfono<input name="phone" type="tel" maxlength="30" placeholder="Ej. 700 12345"></label><label>Patología o motivo de consulta<div class="voice-wrap"><textarea name="pathology" rows="3" placeholder="Describe el motivo…"></textarea><button type="button" class="voice" data-voice="pathology" aria-label="Dictar patología">🎙 Dictar</button></div></label><label>Precio por sesión (Bs)<input name="price" type="number" min="0" step="0.01" required value="0" inputmode="decimal"></label><div class="form-actions"><button type="button" class="secondary" data-close>Cancelar</button><button class="primary" type="submit">Guardar paciente</button></div></form></dialog>
+  <dialog id="sessionDialog"><form id="sessionForm" method="dialog"><div class="dialog-head"><div><p class="eyebrow">HISTORIAL CLÍNICO</p><h2>Registrar sesión</h2></div><button type="button" class="close" data-close aria-label="Cerrar">×</button></div><label>Paciente<select name="patientId" required></select></label><div class="two-col"><label>Número de sesión<input name="number" type="number" min="1" required inputmode="numeric"></label><label>Fecha<input name="date" type="date" required></label></div><label>Tratamiento<div class="voice-wrap"><textarea name="treatment" rows="2" placeholder="Técnicas o ejercicios…"></textarea><button type="button" class="voice" data-voice="treatment">🎙 Dictar</button></div></label><label>Máquina utilizada<input name="machine" placeholder="Ej. TENS, ultrasonido…"><button type="button" class="voice inline-voice" data-voice="machine">🎙 Dictar</button></label><label>Duración (minutos)<input name="duration" type="number" min="0" inputmode="numeric" placeholder="45"></label><label>Observaciones<div class="voice-wrap"><textarea name="notes" rows="3" placeholder="Evolución, tolerancia, recomendaciones…"></textarea><button type="button" class="voice" data-voice="notes">🎙 Dictar</button></div></label><div class="form-actions"><button type="button" class="secondary" data-close>Cancelar</button><button class="primary" type="submit">Guardar sesión</button></div></form></dialog>
+  <dialog id="paymentDialog"><form id="paymentForm" method="dialog"><div class="dialog-head"><div><p class="eyebrow">REGISTRO DE PAGO</p><h2>Anotar un pago</h2></div><button type="button" class="close" data-close aria-label="Cerrar">×</button></div><label>Paciente<select name="patientId" required></select></label><label>Monto recibido (Bs)<input name="amount" type="number" min="0.01" step="0.01" required inputmode="decimal"></label><label>Fecha<input name="date" type="date" required></label><label>Nota (opcional)<input name="note" maxlength="120" placeholder="Ej. Pago de 3 sesiones"></label><div class="form-actions"><button type="button" class="secondary" data-close>Cancelar</button><button class="primary" type="submit">Guardar pago</button></div></form></dialog>
+  <dialog id="detailDialog"><div id="detailContent"></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
