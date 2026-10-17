@@ -2,6 +2,10 @@
 
 Aplicación web móvil instalable para llevar el registro básico de una consulta de fisioterapia. Está pensada para abrirse en Chrome de Android, incluidos teléfonos Samsung.
 
+## Versión publicada
+
+FisioGestión está disponible en HTTPS en [https://jaitasuyocristophersimon-alt.github.io/FisioGestion/](https://jaitasuyocristophersimon-alt.github.io/FisioGestion/). El repositorio de GitHub es público para permitir esta publicación; cualquier persona puede ver y copiar el código. No contiene registros de pacientes.
+
 ## Qué incluye
 
 - Alta, edición, búsqueda y consulta de pacientes: nombre, teléfono, patología y precio por sesión.
@@ -19,12 +23,12 @@ Aplicación web móvil instalable para llevar el registro básico de una consult
 
 ## Publicar en HTTPS e instalar en un Samsung
 
-1. Publica **el contenido de esta carpeta** en un alojamiento web estático que ofrezca HTTPS, por ejemplo GitHub Pages, Cloudflare Pages o Netlify. No cambies las rutas relativas de los archivos. La aplicación requiere HTTPS para el service worker y la instalación, salvo en `localhost` de pruebas.
-2. Abre en el teléfono Samsung el enlace publicado con **Google Chrome**.
-3. Espera a que termine la primera carga con conexión. En el menú ⋮ de Chrome elige **Instalar aplicación** o **Añadir a pantalla de inicio** y confirma. La etiqueta exacta puede variar según la versión de Chrome/Android.
-4. Abre FisioGestión desde el nuevo icono. Después de cargarla y almacenarse sus archivos, la interfaz podrá abrirse sin conexión.
+1. La versión publicada ya está lista en el enlace de arriba. Si publicas una copia nueva, sube **el contenido de esta carpeta** a un alojamiento web estático HTTPS y conserva las rutas relativas. HTTPS es necesario para el service worker y la instalación, salvo en `localhost` de pruebas.
+2. Abre el enlace en el teléfono Samsung con **Google Chrome** y espera a que termine la primera carga con internet.
+3. En el menú ⋮ de Chrome elige **Instalar aplicación** o **Añadir a pantalla de inicio** y confirma. El nombre exacto puede variar según la versión de Chrome/Android.
+4. Abre FisioGestión desde el icono. Después de la primera carga, la interfaz puede abrirse sin conexión cuando el navegador conserve sus archivos.
 
-Este proyecto no está publicado ni incluye un APK. El ZIP contiene el sitio que puedes probar y publicar.
+El ZIP contiene el sitio web instalable; no es un APK.
 
 ## Datos y límites
 
